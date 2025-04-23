@@ -2,18 +2,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карточки для слов</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Карточки иностранных слов</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Карточки для запоминания слов</h1>
-    <label for="topicSelect">Выберите тему:</label>
-    <select id="topicSelect">
-        <option value="all">Все темы</option>
-    </select>
-    <div id="cardsContainer"></div>
-    <script src="script.js"></script>
+  <h1>Карточки иностранных слов</h1>
+
+  <label for="language-select">Перевод:</label>
+  <select id="language-select">
+    <option value="ru-en">Русский → Английский</option>
+    <option value="en-ru">Английский → Русский</option>
+  </select>
+
+  <div id="card" class="card">Загрузка...</div>
+  <button id="next">Следующая</button>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,38 +1,29 @@
 
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f0f0f0;
-}
-
-h1 {
-    text-align: center;
-}
-
-#topicSelect {
-    display: block;
-    margin: 10px auto;
-    padding: 5px;
-}
-
-#cardsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 2em;
+  background-color: #f0f0f0;
 }
 
 .card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    width: 200px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  background-color: white;
+  border: 2px solid #ccc;
+  padding: 2em;
+  margin: 1em auto;
+  max-width: 400px;
+  font-size: 2em;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  background-color: #f9f9f9;
+}
+
+button {
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  font-size: 1em;
 }
