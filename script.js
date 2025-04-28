@@ -1,4 +1,3 @@
-
 let allCards = [];
 let filteredCards = [];
 let currentCardIndex = 0;
@@ -109,15 +108,15 @@ function shuffleWeighted(array) {
 
 function selectNextCard() {
   if (filteredCards.length === 0) return;
-  const totalWeight = filteredCards.reduce((sum, card) => sum + card.weight, 0);
-  let rand = Math.random() * totalWeight;
-  for (let i = 0; i < filteredCards.length; i++) {
-    rand -= filteredCards[i].weight;
-    if (rand <= 0) {
-      currentCardIndex = i;
-      break;
-    }
-  }
+
+  const hardCards = filteredCards.filter(card => card.weight >= 0.5);
+  const easyCards = filteredCards.filter(card => card.weight < 0.5);
+
+  let useHard = Math.random() < 0.8; // 80% вероятность выбора трудной карточки
+
+  let pool = useHard && hardCards.length ? hardCards : easyCards.length ? easyCards : filteredCards;
+  currentCardIndex = filteredCards.indexOf(pool[Math.floor(Math.random() * pool.length)]);
+
   showTranslation = false;
   showCard();
 }
@@ -139,6 +138,7 @@ function updateProgress() {
   const learned = Object.values(progress).filter(w => w < 0.5).length;
   const percent = total ? (learned / total) * 100 : 0;
   document.getElementById('progress-bar').style.width = percent + '%';
+  document.getElementById('progress-text').textContent = `Выучено: ${learned} из ${total}`;
 }
 
 loadCards();
