@@ -37,9 +37,10 @@ function updateTopicOptions() {
 function applyFilters() {
   const selectedTopic = document.getElementById('topic-select').value;
   filteredCards = selectedTopic === 'all'
-    ? allCards
+    ? [...allCards]
     : allCards.filter(card => card.topic === selectedTopic);
 
+  shuffleArray(filteredCards);
   currentCardIndex = 0;
   showTranslation = false;
   showCard();
@@ -83,5 +84,12 @@ document.getElementById('language-select').addEventListener('change', (e) => {
 document.getElementById('topic-select').addEventListener('change', () => {
   applyFilters();
 });
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 loadCards();
