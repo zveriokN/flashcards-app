@@ -5,6 +5,7 @@ let currentCardIndex = 0;
 let showTranslation = false;
 let fromLang = 'русский';
 let toLang = 'английский';
+let progress = {};
 
 async function loadCards() {
   const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSxo3ndoMSpz1pCg--2q2yoYGyZU85EIEIKBtX9gpYejA10jtEJK0rOO38QIwHX7efUj3A9tEVyU6fd/pub?output=csv');
@@ -13,7 +14,14 @@ async function loadCards() {
 
   allCards = rows.map(row => {
     const [ru, en, topic] = row.split(',');
-    return { 'русский': ru.trim(), 'английский': en.trim(), topic: topic?.trim() || 'Без темы' };
+    const id = ru.trim() + '-' + en.trim();
+    return { 
+      id: id,
+      'русский': ru.trim(), 
+      'английский': en.trim(), 
+      topic: topic?.trim() || 'Без темы',
+      weight: getWeight(id)
+    };
   });
 
   updateTopicOptions();
@@ -40,10 +48,11 @@ function applyFilters() {
     ? [...allCards]
     : allCards.filter(card => card.topic === selectedTopic);
 
-  shuffleArray(filteredCards);
   currentCardIndex = 0;
   showTranslation = false;
+  shuffleWeighted(filteredCards);
   showCard();
+  updateProgress();
 }
 
 function showCard() {
@@ -62,10 +71,7 @@ document.getElementById('card').addEventListener('click', () => {
 });
 
 document.getElementById('next').addEventListener('click', () => {
-  if (filteredCards.length === 0) return;
-  currentCardIndex = (currentCardIndex + 1) % filteredCards.length;
-  showTranslation = false;
-  showCard();
+  selectNextCard();
 });
 
 document.getElementById('language-select').addEventListener('change', (e) => {
@@ -85,11 +91,54 @@ document.getElementById('topic-select').addEventListener('change', () => {
   applyFilters();
 });
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+document.getElementById('easy').addEventListener('click', () => {
+  const card = filteredCards[currentCardIndex];
+  updateWeight(card.id, 0.5);
+  selectNextCard();
+});
+
+document.getElementById('hard').addEventListener('click', () => {
+  const card = filteredCards[currentCardIndex];
+  updateWeight(card.id, 1);
+  selectNextCard();
+});
+
+function shuffleWeighted(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+function selectNextCard() {
+  if (filteredCards.length === 0) return;
+  const totalWeight = filteredCards.reduce((sum, card) => sum + card.weight, 0);
+  let rand = Math.random() * totalWeight;
+  for (let i = 0; i < filteredCards.length; i++) {
+    rand -= filteredCards[i].weight;
+    if (rand <= 0) {
+      currentCardIndex = i;
+      break;
+    }
   }
+  showTranslation = false;
+  showCard();
+}
+
+function getWeight(id) {
+  const savedProgress = JSON.parse(localStorage.getItem('progress') || '{}');
+  progress = savedProgress;
+  return savedProgress[id] ? savedProgress[id] : 1;
+}
+
+function updateWeight(id, factor) {
+  progress[id] = Math.max((progress[id] || 1) * factor, 0.1);
+  localStorage.setItem('progress', JSON.stringify(progress));
+  applyFilters();
+}
+
+function updateProgress() {
+  const total = allCards.length;
+  const learned = Object.values(progress).filter(w => w < 0.5).length;
+  const percent = total ? (learned / total) * 100 : 0;
+  document.getElementById('progress-bar').style.width = percent + '%';
 }
 
 loadCards();

@@ -10,6 +10,10 @@
 <body>
   <h1>Карточки иностранных слов</h1>
 
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
   <label for="language-select">Перевод:</label>
   <select id="language-select">
     <option value="ru-en">Русский → Английский</option>
@@ -22,7 +26,13 @@
   </select>
 
   <div id="card" class="card">Загрузка...</div>
-  <button id="next">Следующая</button>
+
+  <div class="buttons">
+    <button id="hard">Трудно</button>
+    <button id="easy">Легко</button>
+  </div>
+
+  <button id="next">Следующая карточка</button>
 
   <script src="script.js"></script>
 </body>
