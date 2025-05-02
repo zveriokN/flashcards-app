@@ -49,21 +49,3 @@ button, select {
 .buttons {
   margin: 1em 0;
 }
-
-@media (max-width: 600px) {
-  body {
-    margin: 1em;
-  }
-
-  .card {
-    font-size: 1.5em;
-    padding: 1.5em;
-    width: 90%;
-  }
-
-  button, select {
-    width: 90%;
-    margin: 0.5em auto;
-    display: block;
-  }
-}
