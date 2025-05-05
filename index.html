@@ -1,33 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Карточки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Карточки иностранных слов</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="controls">
-    <select id="language-select">
-      <option value="ru-en">Русский → Английский</option>
-      <option value="en-ru">Английский → Русский</option>
-    </select>
-    <select id="topic-select">
-      <option value="all">Все темы</option>
-    </select>
-  </div>
-  <div id="card" class="card">Загрузка...</div>
-  <div class="buttons">
-    <button id="hard">Сложно</button>
-    <button id="easy">Легко</button>
-    <button id="next">Следующая карточка</button>
-    <button id="reset">Сбросить прогресс</button>
-  </div>
+  <h1>Карточки иностранных слов</h1>
+
   <div id="progress-container">
     <div id="progress-bar"></div>
-    <div id="progress-text"></div>
   </div>
+  <div id="progress-text"></div>
+
+  <label for="language-select">Перевод:</label>
+  <select id="language-select">
+    <option value="ru-en">Русский → Английский</option>
+    <option value="en-ru">Английский → Русский</option>
+  </select>
+
+  <label for="topic-select">Тема:</label>
+  <select id="topic-select">
+    <option value="all">Все темы</option>
+  </select>
+
+  <div id="card" class="card">Загрузка...</div>
+
+  <div class="buttons">
+    <button id="hard">Трудно</button>
+    <button id="easy">Легко</button>
+  </div>
+
+  <button id="next">Следующая карточка</button>
+
   <script src="script.js"></script>
 </body>
 </html>

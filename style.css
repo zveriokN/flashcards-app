@@ -1,52 +1,51 @@
-
 body {
   font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.card {
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 40px;
-  margin: 20px;
-  font-size: 24px;
   text-align: center;
-  width: 80%;
-  max-width: 400px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.buttons button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
+  margin: 2em;
+  background-color: #f0f0f0;
 }
 
 #progress-container {
-  width: 80%;
-  max-width: 400px;
-  margin-top: 20px;
-  background: #eee;
+  background-color: #ddd;
+  width: 100%;
   height: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
+  margin-bottom: 0.5em;
 }
 
 #progress-bar {
+  background-color: #4CAF50;
   height: 100%;
-  background: #4CAF50;
   width: 0%;
-  transition: width 0.3s;
 }
 
 #progress-text {
-  text-align: center;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #333;
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.card {
+  background-color: white;
+  border: 2px solid #ccc;
+  padding: 2em;
+  margin: 1em auto;
+  max-width: 400px;
+  font-size: 2em;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #f9f9f9;
+}
+
+button, select {
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  font-size: 1em;
+}
+
+.buttons {
+  margin: 1em 0;
 }
